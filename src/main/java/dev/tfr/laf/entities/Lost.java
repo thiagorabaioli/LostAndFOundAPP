@@ -1,5 +1,6 @@
 package dev.tfr.laf.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.tfr.laf.enums.TYPELOST;
 import jakarta.persistence.*;
 
@@ -13,11 +14,12 @@ public class Lost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private TYPELOST typeCod;
+    private Integer typeCod;
     private String whoFind;
 
     private String localFind;
 
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date instantFind;
 
     @ManyToOne
@@ -27,7 +29,7 @@ public class Lost {
     public Lost(Long id, String description, TYPELOST typeCod, String whoFind, String localFind, Date instantFind, UserAPP userApp) {
         this.id = id;
         this.description = description;
-        this.typeCod = typeCod;
+        this.typeCod = typeCod.getCod();
         this.whoFind = whoFind;
         this.localFind = localFind;
         this.instantFind = instantFind;
@@ -51,11 +53,11 @@ public class Lost {
     }
 
     public TYPELOST getTypeCod() {
-        return typeCod;
+        return TYPELOST.toEnum(typeCod);
     }
 
     public void setTypeCod(TYPELOST typeCod) {
-        this.typeCod = typeCod;
+        this.typeCod = typeCod.getCod();
     }
 
     public String getWhoFind() {

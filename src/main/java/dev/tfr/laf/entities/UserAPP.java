@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "TB_user_app")
+@Table(name = "tb_user_app")
 public class UserAPP {
 
     @Id
@@ -14,7 +14,7 @@ public class UserAPP {
     private Long id;
     private String name;
     private String email;
-    private String porNumber;
+    private String pornumber;
 
     @OneToMany(mappedBy = "userApp")
     private List<Lost> losts = new ArrayList<>();
@@ -22,11 +22,12 @@ public class UserAPP {
 
     public UserAPP(){};
 
-    public UserAPP(Long id, String name, String email, String porNumber) {
+    public UserAPP(Long id, String name, String email, String pornumber) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.porNumber = porNumber;
+        this.pornumber = pornumber;
+
     }
 
     public Long getId() {
@@ -53,12 +54,12 @@ public class UserAPP {
         this.email = email;
     }
 
-    public String getPorNumber() {
-        return porNumber;
+    public String getPornumber() {
+        return pornumber;
     }
 
-    public void setPorNumber(String porNumber) {
-        this.porNumber = porNumber;
+    public void setPornumber(String porNumber) {
+        this.pornumber = porNumber;
     }
 
     public List<Lost> getLosts() {
