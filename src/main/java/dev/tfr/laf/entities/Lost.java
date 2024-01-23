@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.tfr.laf.enums.TYPELOST;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -22,9 +24,14 @@ public class Lost {
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private Date instantFind;
 
+    private LocalDateTime d01  = LocalDateTime.now();
+
+
     @ManyToOne
     @JoinColumn(name="userApp_id")
     private UserAPP userApp;
+
+    public Lost(){}
 
     public Lost(Long id, String description, TYPELOST typeCod, String whoFind, String localFind, Date instantFind, UserAPP userApp) {
         this.id = id;
@@ -34,6 +41,10 @@ public class Lost {
         this.localFind = localFind;
         this.instantFind = instantFind;
         this.userApp = userApp;
+    }
+
+    public LocalDateTime getD01() {
+        return d01;
     }
 
     public Long getId() {

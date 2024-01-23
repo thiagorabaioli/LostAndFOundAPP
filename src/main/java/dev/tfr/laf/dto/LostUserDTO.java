@@ -1,13 +1,16 @@
 package dev.tfr.laf.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import dev.tfr.laf.entities.Lost;
 import dev.tfr.laf.entities.UserAPP;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class LostDTO {
+public class LostUserDTO {
 
     private Long id;
     private String description;
@@ -16,29 +19,37 @@ public class LostDTO {
 
     private String localFind;
 
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    private LocalDateTime d01  = LocalDateTime.now();
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+
     private Date instantFind;
 
 
-    private UserAPP userApp;
+    private UserAPPDTO userAppDto;
 
-    public LostDTO(Long id, String description, Integer typeCod, String whoFind, String localFind, Date instantFind, UserAPP userApp) {
+    public LostUserDTO(Long id, String description, Integer typeCod, String whoFind, String localFind, Date instantFind, UserAPPDTO userAppDto) {
         this.id = id;
         this.description = description;
         this.typeCod = typeCod;
         this.whoFind = whoFind;
         this.localFind = localFind;
         this.instantFind = instantFind;
-        this.userApp = userApp;
+        this.userAppDto = userAppDto;
     }
 
-    public LostDTO(Lost entity){
+    public LostUserDTO(Lost entity) {
         id = entity.getId();
         description = entity.getDescription();
         typeCod = entity.getTypeCod().getCod();
         whoFind = entity.getWhoFind();
+        localFind = entity.getLocalFind();
         instantFind = entity.getInstantFind();
-        userApp = entity.getUserApp()
+        userAppDto = new UserAPPDTO(entity.getUserApp());
+    }
+
+    public LocalDateTime getD01() {
+        return d01;
     }
 
     public Long getId() {
@@ -65,7 +76,7 @@ public class LostDTO {
         return instantFind;
     }
 
-    public UserAPP getUserApp() {
-        return userApp;
+    public UserAPPDTO getUserAppDto() {
+        return userAppDto;
     }
 }

@@ -1,9 +1,11 @@
 package dev.tfr.laf.entities;
 
+
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name = "tb_user_app")
@@ -15,6 +17,7 @@ public class UserAPP {
     private String name;
     private String email;
     private String pornumber;
+
 
     @OneToMany(mappedBy = "userApp")
     private List<Lost> losts = new ArrayList<>();
